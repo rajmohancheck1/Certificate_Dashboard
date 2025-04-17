@@ -1,0 +1,13 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F3F4F6" />
+  <rect x="150" y="100" width="500" height="400" rx="20" fill="#FFFFFF" stroke="#2563EB" stroke-width="4" />
+  <text x="200" y="200" font-family="Arial" font-size="40" fill="#1E40AF">Birth Certificate</text>
+  <line x1="200" y1="220" x2="600" y2="220" stroke="#BFDBFE" stroke-width="2" />
+  <text x="200" y="280" font-family="Arial" font-size="24" fill="#64748B">Name:</text>
+  <line x1="200" y1="300" x2="600" y2="300" stroke="#E2E8F0" stroke-width="2" />
+  <text x="200" y="360" font-family="Arial" font-size="24" fill="#64748B">Date of Birth:</text>
+  <line x1="200" y1="380" x2="600" y2="380" stroke="#E2E8F0" stroke-width="2" />
+  <text x="200" y="440" font-family="Arial" font-size="24" fill="#64748B">Place of Birth:</text>
+  <line x1="200" y1="460" x2="600" y2="460" stroke="#E2E8F0" stroke-width="2" />
+  <circle cx="650" cy="150" r="30" fill="#BFDBFE" opacity="0.5" />
+</svg>

@@ -1,10 +1,14 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from './contexts/AuthContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 
-// Layouts
-import DashboardLayout from './layouts/DashboardLayout';
-import AuthLayout from './layouts/AuthLayout';
+// Shared Components
+import Header from './components/shared/Header';
+
+// Public Pages
+import Home from './pages/Home';
+import Services from './pages/Services';
+import About from './pages/About';
 
 // Auth Pages
 import Login from './pages/auth/Login';
@@ -18,6 +22,11 @@ import ApplicationDetails from './pages/citizen/ApplicationDetails';
 // Admin Pages
 import AdminDashboard from './pages/admin/Dashboard';
 import ApplicationManagement from './pages/admin/ApplicationManagement';
+
+// Layouts
+import AuthLayout from './layouts/AuthLayout';
+import DashboardLayout from './layouts/DashboardLayout';
+import Footer from './components/Footer/Footer';
 
 const PrivateRoute = ({ children, roles }) => {
   const { user, isAuthenticated } = useAuth();
@@ -35,45 +44,57 @@ const PrivateRoute = ({ children, roles }) => {
 
 function App() {
   return (
-    <Routes>
-      {/* Auth Routes */}
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Route>
+    <AuthProvider>
+      <Header />
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/about" element={<About />} />
 
-      {/* Protected Routes */}
-      <Route element={
-        <PrivateRoute>
-          <DashboardLayout />
-        </PrivateRoute>
-      }>
-        {/* Citizen Routes */}
-        <Route path="/" element={<Navigate to="/my-applications" />} />
-        <Route path="/apply" element={<CertificateApplication />} />
-        <Route path="/my-applications" element={<MyApplications />} />
-        <Route path="/applications/:id" element={<ApplicationDetails />} />
+          {/* Auth Routes */}
+          <Route element={<AuthLayout />}>
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/register" element={<Register />} />
+          </Route>
 
-        {/* Admin Routes */}
-        <Route
-          path="/admin/dashboard"
-          element={
-            <PrivateRoute roles={['admin']}>
-              <AdminDashboard />
+          {/* Protected Routes */}
+          <Route element={
+            <PrivateRoute>
+              <DashboardLayout />
             </PrivateRoute>
-          }
-        />
-        <Route
-          path="/admin/applications"
-          element={
-            <PrivateRoute roles={['admin']}>
-              <ApplicationManagement />
-            </PrivateRoute>
-          }
-        />
-      </Route>
-    </Routes>
+          }>
+            {/* Citizen Routes */}
+            <Route path="/dashboard" element={<Navigate to="/my-applications" />} />
+            <Route path="/apply" element={<CertificateApplication />} />
+            <Route path="/my-applications" element={<MyApplications />} />
+            <Route path="/applications/:id" element={<ApplicationDetails />} />
+
+            {/* Admin Routes */}
+            <Route
+              path="/admin/dashboard"
+              element={
+                <PrivateRoute roles={['admin']}>
+                  <AdminDashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/applications"
+              element={
+                <PrivateRoute roles={['admin']}>
+                  <ApplicationManagement />
+                </PrivateRoute>
+              }
+            />
+          </Route>
+        </Routes>
+              <Footer />
+        
+        
+    </AuthProvider>
   );
 }
+
 
 export default App;
