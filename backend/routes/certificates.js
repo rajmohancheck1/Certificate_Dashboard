@@ -1,8 +1,39 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 const { check, validationResult } = require('express-validator');
 const Certificate = require('../models/Certificate');
 const { protect, authorize } = require('../middleware/auth');
+const upload = require('../middleware/upload');
+
+// @route   POST /api/certificates/upload
+// @desc    Upload supporting documents
+router.post('/upload', protect, upload.array('documents', 5), async (req, res) => {
+  try {
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ msg: 'No files uploaded' });
+    }
+
+    const uploadedFiles = req.files.map(file => ({
+      documentType: path.extname(file.originalname).toLowerCase(),
+      documentUrl: file.filename,
+      uploadedAt: new Date()
+    }));
+
+    res.json(uploadedFiles);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   GET /api/certificates/document/:filename
+// @desc    Get uploaded document
+router.get('/document/:filename', protect, (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, '..', 'uploads', filename);
+  res.sendFile(filePath);
+});
 
 // @route   POST /api/certificates
 // @desc    Submit a new certificate application

@@ -1,31 +1,80 @@
-require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const path = require('path');
+const config = require('./config/config');
+const errorHandler = require('./middleware/errorHandler');
+const logger = require('./utils/logger');
+const connectDB = require('./utils/db');
+
+
+
+// Create upload directory if it doesn't exist
+const fs = require('fs');
+if (!fs.existsSync(config.uploadDir)) {
+  fs.mkdirSync(config.uploadDir, { recursive: true });
+}
+
+// Create logs directory in production
+if (config.nodeEnv === 'production' && !fs.existsSync('logs')) {
+  fs.mkdirSync('logs');
+}
+
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Security middleware
+app.use(helmet());
+app.use(cors({ origin: config.corsOrigin }));
+app.use(mongoSanitize());
+app.use(xss());
+
+// Rate limiting
+const limiter = rateLimit(config.rateLimit);
+app.use('/api/', limiter);
+
+// Body parser
+app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/certificate-system';
-mongoose.connect(MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+// Serve static files from the React app in production
+if (config.nodeEnv === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+}
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/certificates', require('./routes/certificates'));
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Something went wrong!' });
+// Serve React app in production
+if (config.nodeEnv === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  });
+}
+
+// Error handler
+app.use(errorHandler);
+
+const PORT = config.port;
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  logger.error('Uncaught Exception:', err);
+  process.exit(1);
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+  logger.error('Unhandled Rejection:', err);
+  process.exit(1);
+});
+
+// Connect to MongoDB
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    logger.info(`Server running in ${config.nodeEnv} mode on port ${PORT}`);
+  });
 });

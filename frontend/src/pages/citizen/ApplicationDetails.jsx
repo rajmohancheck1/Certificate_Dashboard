@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { certificateAPI } from '../../services/api';
+import config from '../../config/config';
 
 const ApplicationDetails = () => {
   const { id } = useParams();
@@ -89,10 +90,30 @@ const ApplicationDetails = () => {
                       </div>
                       <div className="ml-4 flex-shrink-0">
                         <a
-                          href={doc.documentUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          href="#"
                           className="font-medium text-primary-600 hover:text-primary-500"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            const token = localStorage.getItem('token');
+                            const url = `${config.apiBaseUrl}/certificates/document/${doc.documentUrl}`;
+                            fetch(url, {
+                              headers: {
+                                Authorization: `Bearer ${token}`
+                              }
+                            })
+                              .then(response => {
+                                if (!response.ok) throw new Error('Failed to fetch document');
+                                return response.blob();
+                              })
+                              .then(blob => {
+                                const fileUrl = window.URL.createObjectURL(blob);
+                                window.open(fileUrl, '_blank');
+                              })
+                              .catch(error => {
+                                console.error('Error fetching document:', error);
+                                alert('Failed to open document. Please try again later.');
+                              });
+                          }}
                         >
                           View
                         </a>

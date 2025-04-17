@@ -69,23 +69,28 @@ const CertificateApplication = () => {
     resetForm
   } = useFormValidation(initialState, validationRules);
 
-  const handleFileUpload = (e) => {
-    const newFiles = Array.from(e.target.files);
-    setFiles(prev => [...prev, ...newFiles]);
+  const handleFileUpload = async (e) => {
+    try {
+      const newFiles = Array.from(e.target.files);
+      setFiles(prev => [...prev, ...newFiles]);
 
-    const newDocuments = newFiles.map(file => ({
-      documentType: 'Supporting Document',
-      documentUrl: URL.createObjectURL(file),
-      uploadedAt: new Date(),
-      fileName: file.name
-    }));
+      const formData = new FormData();
+      newFiles.forEach(file => {
+        formData.append('documents', file);
+      });
 
-    handleChange({
-      target: {
-        name: 'supportingDocuments',
-        value: [...values.supportingDocuments, ...newDocuments]
-      }
-    });
+      const response = await certificateAPI.uploadDocuments(formData);
+      const uploadedDocuments = response.data;
+
+      handleChange({
+        target: {
+          name: 'supportingDocuments',
+          value: [...values.supportingDocuments, ...uploadedDocuments]
+        }
+      });
+    } catch (error) {
+      setError('Failed to upload documents. Please try again.');
+    }
   };
 
   const removeFile = (index) => {

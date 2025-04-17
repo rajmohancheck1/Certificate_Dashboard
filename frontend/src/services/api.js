@@ -1,8 +1,9 @@
 import axios from 'axios';
+import config from '../config/config';
 
 // Create axios instance with default config
 const api = axios.create({
-  baseURL: '/api'
+  baseURL: config.apiBaseUrl
 });
 
 // Add token to requests
@@ -29,7 +30,16 @@ export const certificateAPI = {
   updateStatus: (id, statusData) => api.put(`/certificates/${id}`, statusData),
 
   // Get dashboard statistics (admin only)
-  getDashboardStats: () => api.get('/certificates/stats/dashboard')
+  getDashboardStats: () => api.get('/certificates/stats/dashboard'),
+
+  // Upload supporting documents
+  uploadDocuments: (formData) => {
+    return api.post('/certificates/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  }
 };
 
 // Auth API calls
