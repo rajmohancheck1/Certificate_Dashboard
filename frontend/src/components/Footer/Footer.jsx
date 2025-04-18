@@ -29,16 +29,16 @@ const Footer = () => {
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">Video Guide</a></li>
             <li><a href="#">eBook</a></li>
-            <li><a href="#">User Manual</a></li>
-            <li><a href="#">Accessibility</a></li>
+            {/* <li><a href="#">User Manual</a></li>
+            <li><a href="#">Accessibility</a></li> */}
           </ul>
         </div>
         <div className="footer-section">
-          <h4>Integrated With</h4>
+          <h4>Integrated Securely</h4>
           <div className="logos">
             <div className="image-container">
               <img 
-                src="https://th.bing.com/th/id/OIP.8xWK581Ni3KzP9bFLXRL0gHaEK?w=313&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" 
+                src="https://th.bing.com/th/id/OIP.jP1XQn6hpH8O36KWIUCgkwHaJZ?rs=1&pid=ImgDetMain" 
                 alt="DigiLocker"
                 className="digilocker-image"
               />

@@ -58,12 +58,12 @@ const DashboardLayout = () => {
                 <p className="text-sm font-medium text-gray-700">{user?.name}</p>
                 <p className="text-xs text-gray-500 capitalize">{user?.role}</p>
               </div>
-              <button
+              {/* <button
                 onClick={handleLogout}
                 className="px-3 py-1 text-sm text-red-600 border border-red-600 rounded-md hover:bg-red-50"
               >
                 Logout
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

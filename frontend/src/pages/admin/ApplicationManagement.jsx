@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { certificateAPI } from '../../services/api';
+import { Link } from 'react-router-dom';
 
 const ApplicationManagement = () => {
   const [applications, setApplications] = useState([]);
@@ -72,8 +73,15 @@ const ApplicationManagement = () => {
                   {new Date(application.applicationDate).toLocaleDateString()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  {application.status === 'pending' && (
-                    <div className="space-x-2">
+                  <Link
+                    to={`/applications/${application._id}`}
+                    className="text-indigo-600 hover:text-indigo-900 mr-2"
+                  >
+                    View
+                  </Link>
+                  
+                  {/* {application.status === 'pending' && (
+                    <div className="space-x-2 inline">
                       <button
                         onClick={() => handleStatusUpdate(application._id, 'approved', '')}
                         className="text-green-600 hover:text-green-900"
@@ -87,7 +95,7 @@ const ApplicationManagement = () => {
                         Reject
                       </button>
                     </div>
-                  )}
+                  )} */}
                 </td>
               </tr>
             ))}

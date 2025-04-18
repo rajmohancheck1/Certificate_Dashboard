@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { certificateAPI } from '../../services/api';
 import config from '../../config/config';
+import { useAuth } from '../../contexts/AuthContext';
 
 const ApplicationDetails = () => {
   const { id } = useParams();
+  const { user } = useAuth();
   const [application, setApplication] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [selectedApplication, setSelectedApplication] = useState(null);
+  
+  const isAdmin = user?.role === 'admin';
 
   useEffect(() => {
     fetchApplicationDetails();
@@ -21,6 +26,16 @@ const ApplicationDetails = () => {
       setError('Failed to fetch application details');
     } finally {
       setLoading(false);
+    }
+  };
+  
+  const handleStatusUpdate = async (id, status, remarks) => {
+    try {
+      await certificateAPI.updateStatus(id, { status, adminRemarks: remarks });
+      fetchApplicationDetails(); // Refresh the application details
+      setSelectedApplication(null);
+    } catch (err) {
+      setError('Failed to update application status');
     }
   };
 
@@ -139,9 +154,64 @@ const ApplicationDetails = () => {
                 </dd>
               </div>
             )}
+            
+            {/* Admin Controls - Only visible to admin users */}
+            {isAdmin && application.status === 'pending' && (
+              <div className="sm:col-span-2 mt-4">
+                <dt className="text-sm font-medium text-gray-500">Admin Actions</dt>
+                <dd className="mt-2">
+                  <div className="space-x-2">
+                    <button
+                      onClick={() => handleStatusUpdate(application._id, 'approved', '')}
+                      className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      onClick={() => setSelectedApplication(application)}
+                      className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                    >
+                      Reject
+                    </button>
+                  </div>
+                </dd>
+              </div>
+            )}
           </dl>
         </div>
       </div>
+      
+      {/* Rejection Modal */}
+      {selectedApplication && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg max-w-md w-full">
+            <h3 className="text-lg font-medium mb-4">Reject Application</h3>
+            <textarea
+              className="w-full border rounded p-2 mb-4"
+              rows="4"
+              placeholder="Enter rejection reason"
+              id="rejectionRemarks"
+            />
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={() => setSelectedApplication(null)}
+                className="px-4 py-2 text-gray-600 hover:text-gray-800"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  const remarks = document.getElementById('rejectionRemarks').value;
+                  handleStatusUpdate(selectedApplication._id, 'rejected', remarks);
+                }}
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+              >
+                Confirm Rejection
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

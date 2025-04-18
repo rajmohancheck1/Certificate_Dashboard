@@ -32,7 +32,7 @@ const PrivateRoute = ({ children, roles }) => {
   const { user, isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/auth/login" />;
   }
 
   if (roles && !roles.includes(user?.role)) {
@@ -89,8 +89,9 @@ function App() {
             />
           </Route>
         </Routes>
-              <Footer />
-        
+        <div className="ml-64">
+        <Footer />
+      </div>
         
     </AuthProvider>
   );
