@@ -950,6 +950,7 @@ const Dashboard = () => {
       {/* Filters row */}
       <div className="bg-white p-3 rounded shadow">
         <div className="flex flex-wrap gap-3">
+          <div className="min-w-[150px]">
           <Dropdown 
             label="Time Range"
             options={[
@@ -964,6 +965,7 @@ const Dashboard = () => {
             value={timeRange}
             onChange={setTimeRange}
           />
+          </div>
           
           {/* {timeRange === 'custom' && (
             <DateRangePicker 
@@ -973,7 +975,7 @@ const Dashboard = () => {
               onEndDateChange={setEndDate}
             />
           )} */}
-          
+          <div className="min-w-[150px]">
           <Dropdown 
             label="Certificate Type"
             options={[
@@ -983,6 +985,7 @@ const Dashboard = () => {
             value={certificateTypeFilter}
             onChange={setCertificateTypeFilter}
           />
+          </div>
           <div className="min-w-[150px]">
           <Dropdown 
             label="Status"

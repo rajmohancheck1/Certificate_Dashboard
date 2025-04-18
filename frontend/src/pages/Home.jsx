@@ -3,6 +3,9 @@ import digitalCertificate from '../assets/images/digital-certificate.svg';
 import fastProcessing from '../assets/images/fast-processing.svg';
 import support from '../assets/images/support.svg';
 import Carousel from '../components/shared/Carousel';
+import img1 from '../assets/images/hero1.jpg';
+import img2 from '../assets/images/img2.jpg';
+import img3 from '../assets/images/img3.jpg';
 
 const Home = () => {
   return (
@@ -11,7 +14,7 @@ const Home = () => {
       <Carousel
         images={[
           {
-            url:"https://images.unsplash.com/photo-1565019011521-b0575cbb57c8?w=1600&h=800",
+            url:img1,
             alt: "Digital Certificate Management",
             title: "Secure Certificate Management System",
             description: "Streamlined process for all your certification needs",
@@ -19,7 +22,7 @@ const Home = () => {
             buttonLink: "/my-applications"
           },
           {
-            url: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600&h=800",
+            url: img2,
             alt: "Fast Processing",
             title: "Quick and Efficient Processing",
             description: "Get your certificates processed in record time",
@@ -27,7 +30,7 @@ const Home = () => {
             buttonLink: "/services"
           },
           {
-            url: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=1600&h=800",
+            url: img3,
             alt: "24/7 Support",
             title: "24/7 Customer Support",
             description: "We're here to help you every step of the way",

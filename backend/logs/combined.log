@@ -2,3 +2,11 @@
 {"level":"info","message":"Server running in production mode on port 5000","timestamp":"2025-04-18T05:03:06.383Z"}
 {"level":"info","message":"MongoDB Connected: ac-811meyk-shard-00-00.j8qthxs.mongodb.net","timestamp":"2025-04-18T05:34:30.594Z"}
 {"level":"info","message":"Server running in production mode on port 5000","timestamp":"2025-04-18T05:34:30.611Z"}
+{"level":"info","message":"MongoDB Connected: ac-811meyk-shard-00-00.j8qthxs.mongodb.net","timestamp":"2025-04-18T05:46:44.013Z"}
+{"level":"info","message":"Server running in production mode on port 5000","timestamp":"2025-04-18T05:46:44.029Z"}
+{"level":"info","message":"MongoDB Connected: ac-811meyk-shard-00-02.j8qthxs.mongodb.net","timestamp":"2025-04-18T06:30:03.010Z"}
+{"level":"info","message":"Server running in production mode on port 5000","timestamp":"2025-04-18T06:30:03.023Z"}
+{"level":"error","message":{"error":{"code":"ENOENT","errno":-4058,"expose":false,"path":"F:\\praveena_project\\backend\\uploads\\documents-1744955982209-18011884.jpg","status":404,"statusCode":404,"syscall":"stat"},"requestInfo":{"method":"GET","url":"/api/certificates/document/documents-1744955982209-18011884.jpg","user":"6801e992a5934769b8fa821d"}},"timestamp":"2025-04-18T06:31:46.560Z"}
+{"level":"info","message":"MongoDB Connected: ac-811meyk-shard-00-02.j8qthxs.mongodb.net","timestamp":"2025-04-18T06:34:08.173Z"}
+{"level":"info","message":"Server running in production mode on port 5000","timestamp":"2025-04-18T06:34:08.192Z"}
+{"level":"error","message":{"error":{"code":"ENOENT","errno":-4058,"expose":false,"path":"F:\\praveena_project\\backend\\uploads\\documents-1744955982209-18011884.jpg","status":404,"statusCode":404,"syscall":"stat"},"requestInfo":{"method":"GET","url":"/api/certificates/document/documents-1744955982209-18011884.jpg","user":"6801e992a5934769b8fa821d"}},"timestamp":"2025-04-18T06:34:32.063Z"}

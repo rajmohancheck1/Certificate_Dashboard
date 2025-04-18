@@ -1,6 +1,9 @@
 import React from 'react';
 import './Footer.css'; // You'll need to create this CSS file
 
+import secureImage from '../../assets/images/secureimg.jpg'; // Adjust the path as necessary
+
+
 const Footer = () => {
   return (
     <footer className="footer">
@@ -38,7 +41,7 @@ const Footer = () => {
           <div className="logos">
             <div className="image-container">
               <img 
-                src="https://th.bing.com/th/id/OIP.jP1XQn6hpH8O36KWIUCgkwHaJZ?rs=1&pid=ImgDetMain" 
+                src={secureImage}
                 alt="DigiLocker"
                 className="digilocker-image"
               />
