@@ -17,6 +17,7 @@ import {
   Filler
 } from 'chart.js';
 import { FiUsers, FiCheckCircle, FiXCircle, FiClock, FiFilter, FiDownload, FiRefreshCw, FiCalendar, FiMap } from 'react-icons/fi';
+import ApplicationManagement from './ApplicationManagement';
 
 // Register ChartJS components
 ChartJS.register(
@@ -56,6 +57,7 @@ const StatCard = ({ icon: Icon, title, value, color, percentChange }) => {
     </div>
   );
 };
+
 
 // Custom dropdown selector component
 const Dropdown = ({ label, options, value, onChange }) => {
@@ -1119,7 +1121,7 @@ const Dashboard = () => {
       </div>
       
       {/* Recent Applications Table */}
-      <div className="bg-white p-3 rounded shadow">
+      {/* <div className="bg-white p-3 rounded shadow">
         <h2 className="text-sm font-medium mb-3">Recent Applications</h2>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -1172,9 +1174,11 @@ const Dashboard = () => {
           </table>
         </div>
       </div>
-      
+       */}
+
+       <ApplicationManagement/>
       {/* Summary section */}
-      <div className="bg-white p-3 rounded shadow">
+      {/* <div className="bg-white p-3 rounded shadow">
         <h2 className="text-sm font-medium mb-3">Summary</h2>
         <p className="text-xs text-gray-600">
           Showing {filteredData.length} of {allData.length} total applications.
@@ -1199,7 +1203,7 @@ const Dashboard = () => {
             <span> Subdivision: {subdivisionFilter}.</span>
           )}
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };

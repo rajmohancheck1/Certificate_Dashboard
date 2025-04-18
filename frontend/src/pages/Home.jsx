@@ -158,7 +158,7 @@ const Home = () => {
           <h2 className="text-4xl font-bold mb-4 animate-fade-in">Ready to Get Started?</h2>
           <p className="text-xl mb-8 text-blue-100">Join thousands of satisfied users who trust our certificate management system</p>
           <Link 
-            to="/auth/register"
+            to="/apply"
             className="bg-white text-blue-600 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 inline-block"
           >
             Register Now
