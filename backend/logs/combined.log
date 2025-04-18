@@ -1,2 +1,4 @@
 {"level":"info","message":"MongoDB Connected: localhost","timestamp":"2025-04-18T05:03:06.372Z"}
 {"level":"info","message":"Server running in production mode on port 5000","timestamp":"2025-04-18T05:03:06.383Z"}
+{"level":"info","message":"MongoDB Connected: ac-811meyk-shard-00-00.j8qthxs.mongodb.net","timestamp":"2025-04-18T05:34:30.594Z"}
+{"level":"info","message":"Server running in production mode on port 5000","timestamp":"2025-04-18T05:34:30.611Z"}

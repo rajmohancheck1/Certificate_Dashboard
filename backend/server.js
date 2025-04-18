@@ -9,13 +9,15 @@ const config = require('./config/config');
 const errorHandler = require('./middleware/errorHandler');
 const logger = require('./utils/logger');
 const connectDB = require('./utils/db');
+const path = require('path');
 
 
 
 // Create upload directory if it doesn't exist
 const fs = require('fs');
 if (!fs.existsSync(config.uploadDir)) {
-  fs.mkdirSync(config.uploadDir, { recursive: true });
+  fs.mkdirSync(path.join(__dirname, 'uploads'), { recursive: true });
+
 }
 
 // Create logs directory in production
