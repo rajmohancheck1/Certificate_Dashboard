@@ -43,7 +43,8 @@ const Header = () => {
                   to={user?.role === 'admin' ? '/admin/dashboard' : '/my-applications'}
                   className="text-blue-100 hover:text-white transition-all transform hover:-translate-y-0.5"
                 >
-                  Dashboard
+                  {user?.role === 'admin' ? 'Dashboard' : 'My Applications'}
+                  
                 </Link>
                 <button
                   onClick={logout}

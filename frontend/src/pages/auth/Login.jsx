@@ -105,7 +105,7 @@ const Login = () => {
 
         <div className="text-sm text-center">
           <Link
-            to="/register"
+            to="/auth/register"
             className="inline-flex items-center font-medium text-primary-600 hover:text-primary-500 transition duration-150 ease-in-out"
           >
             <span>Don't have an account? Register</span>
