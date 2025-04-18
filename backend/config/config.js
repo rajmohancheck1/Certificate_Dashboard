@@ -18,7 +18,9 @@ module.exports = {
   jwtExpire: process.env.JWT_EXPIRE || '30d',
 
   // CORS configuration
-  corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  corsOrigin:  process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim())
+  : ['http://localhost:3000'],
 
   // Upload configuration
   uploadDir: process.env.UPLOAD_DIR || path.join(__dirname, '..', 'uploads'),
