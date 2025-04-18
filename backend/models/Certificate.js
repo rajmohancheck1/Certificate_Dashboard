@@ -21,7 +21,9 @@ const certificateSchema = new mongoose.Schema({
       'Agriculturist Certificate',
       'Certificate of Residence in Hilly Area',
       'Certified Copy',
-      'General Affidavit'
+      'General Affidavit',
+      'Birth Certificate',
+      'Community Certificate'
     ]
   },
   status: {

@@ -15,8 +15,8 @@ const certificateTypes = [
   'Landless Certificate',
   'Agriculturist Certificate',
   'Certificate of Residence in Hilly Area',
-  'Certified Copy',
-  'General Affidavit'
+  'Birth Certificate',
+  'Community Certificate'
 ];
 
 const subdivisions = [

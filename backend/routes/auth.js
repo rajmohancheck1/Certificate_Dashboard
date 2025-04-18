@@ -4,31 +4,23 @@ const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { protect, authorize } = require('../middleware/auth');
-const upload = require('../middleware/upload');
 
 // @route   POST /api/auth/register
 // @desc    Register a new user
-router.post('/register', upload.single('birthCertificate'), [
+router.post('/register', [
   check('name', 'Name is required').not().isEmpty(),
   check('email', 'Please include a valid email').isEmail(),
   check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 }),
-  check('phone', 'Phone number is required').not().isEmpty(),
-  check('address', 'Address is required').not().isEmpty(),
-  check('dateOfBirth', 'Date of birth is required').not().isEmpty(),
-  check('community', 'Community is required').not().isEmpty()
+  
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, email, password, phone, address, dateOfBirth, community } = req.body;
+  const { name, email, password } = req.body;
 
   try {
-    if (!req.file) {
-      return res.status(400).json({ message: 'Birth certificate document is required' });
-    }
-
     let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ message: 'User already exists' });
@@ -37,12 +29,7 @@ router.post('/register', upload.single('birthCertificate'), [
     user = new User({
       name,
       email,
-      password,
-      phone,
-      address,
-      dateOfBirth: new Date(dateOfBirth),
-      community,
-      birthCertificate: req.file.filename
+      password
     });
 
     await user.save();
