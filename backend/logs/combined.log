@@ -12,3 +12,18 @@
 {"level":"error","message":{"error":{"code":"ENOENT","errno":-4058,"expose":false,"path":"F:\\praveena_project\\backend\\uploads\\documents-1744955982209-18011884.jpg","status":404,"statusCode":404,"syscall":"stat"},"requestInfo":{"method":"GET","url":"/api/certificates/document/documents-1744955982209-18011884.jpg","user":"6801e992a5934769b8fa821d"}},"timestamp":"2025-04-18T06:34:32.063Z"}
 {"level":"info","message":"MongoDB Connected: ac-811meyk-shard-00-00.j8qthxs.mongodb.net","timestamp":"2025-04-18T08:11:40.977Z"}
 {"level":"info","message":"Server running in production mode on port 5000","timestamp":"2025-04-18T08:11:40.990Z"}
+{"level":"info","message":"MongoDB Connected: ac-811meyk-shard-00-01.j8qthxs.mongodb.net","timestamp":"2025-04-18T16:45:59.507Z"}
+{"level":"info","message":"Server running in production mode on port 5000","timestamp":"2025-04-18T16:45:59.529Z"}
+{"level":"info","message":"MongoDB reconnected","timestamp":"2025-04-18T16:58:29.464Z"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2025-04-18T17:00:35.646Z"}
+{"level":"info","message":"MongoDB reconnected","timestamp":"2025-04-18T17:00:39.316Z"}
+{"level":"info","message":"MongoDB reconnected","timestamp":"2025-04-18T17:03:58.615Z"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2025-04-18T17:05:59.125Z"}
+{"level":"info","message":"MongoDB reconnected","timestamp":"2025-04-18T17:05:59.767Z"}
+{"level":"info","message":"MongoDB reconnected","timestamp":"2025-04-18T17:06:59.891Z"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2025-04-18T17:07:10.738Z"}
+{"level":"info","message":"MongoDB reconnected","timestamp":"2025-04-18T17:07:12.103Z"}
+{"level":"info","message":"MongoDB reconnected","timestamp":"2025-04-18T17:12:33.060Z"}
+{"level":"info","message":"MongoDB reconnected","timestamp":"2025-04-18T17:12:35.313Z"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2025-04-18T17:14:00.248Z"}
+{"level":"info","message":"MongoDB reconnected","timestamp":"2025-04-18T17:14:00.643Z"}
